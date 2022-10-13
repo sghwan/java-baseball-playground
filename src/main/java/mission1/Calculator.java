@@ -19,32 +19,39 @@ public class Calculator {
     public int multiply(int previousResult, int currentValue) {
         return previousResult * currentValue;
     }
+
     public int divide(int previousResult, int currentValue) {
         return previousResult / currentValue;
     }
 
+    public int getCurrentResult(String operator, int previousResult, int currentValue) {
+        if (operator.equals("+"))
+            return add(previousResult, currentValue);
+        if (operator.equals("-"))
+            return subtract(previousResult, currentValue);
+        if (operator.equals("*"))
+            return multiply(previousResult, currentValue);
+        if (operator.equals("/"))
+            return divide(previousResult, currentValue);
+
+        return currentValue;
+    }
 
     public int calculate(String input) {
         String[] values = input.split(" ");
         int result = 0;
         String operator = "";
+
         for (int i = 0; i < values.length; i++) {
-            if (isOperator(values[i]))
+            if (isOperator(values[i])) {
                 operator = values[i];
-            else {
-                int currentValue = Integer.parseInt(values[i]);
-                if (operator.equals(""))
-                    result = Integer.parseInt(values[i]);
-                if (operator.equals("+"))
-                    result = add(result, currentValue);
-                if (operator.equals("-"))
-                    result = subtract(result, currentValue);
-                if (operator.equals("*"))
-                    result = multiply(result, currentValue);
-                if (operator.equals("/"))
-                    result = divide(result, currentValue);
+                continue;
             }
+
+            int currentValue = Integer.parseInt(values[i]);
+            result = getCurrentResult(operator, result, currentValue);
         }
+
         return result;
     }
 }
