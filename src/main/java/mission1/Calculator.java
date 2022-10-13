@@ -24,7 +24,7 @@ public class Calculator {
         return previousResult / currentValue;
     }
 
-    public int getCurrentResult(String operator, int previousResult, int currentValue) {
+    public int getCurrentResult(int previousResult, int currentValue, String operator) {
         if (operator.equals("+"))
             return add(previousResult, currentValue);
         if (operator.equals("-"))
@@ -43,13 +43,12 @@ public class Calculator {
         String operator = "";
 
         for (int i = 0; i < values.length; i++) {
-            if (isOperator(values[i])) {
-                operator = values[i];
-                continue;
+            if (!isOperator(values[i])) {
+                int currentValue = Integer.parseInt(values[i]);
+                result = getCurrentResult(result, currentValue, operator);
             }
 
-            int currentValue = Integer.parseInt(values[i]);
-            result = getCurrentResult(operator, result, currentValue);
+            operator = values[i];
         }
 
         return result;
