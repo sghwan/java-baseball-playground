@@ -30,4 +30,10 @@ public class StringTest {
         String str2 = "1";
         assertThat(str2.split(",")).contains("1");
     }
+
+    @Test
+    void substring() {
+        String str = "(1,2)";
+        assertThat(str.substring(1, str.length() - 1)).isEqualTo("1,2");
+    }
 }
