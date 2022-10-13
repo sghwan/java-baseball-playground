@@ -28,4 +28,12 @@ public class SetTest {
         //Set Collection은 중복을 허락하지 않는다.
         assertThat(numbers.size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("Set의 원소를 확인 contains() 메소드를 통해 확인 ")
+    void contains() {
+        assertThat(numbers.contains(1)).isTrue();
+        assertThat(numbers.contains(2)).isTrue();
+        assertThat(numbers.contains(3)).isTrue();
+    }
 }
