@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -44,5 +45,13 @@ public class SetTest {
     @DisplayName("Set의 원소를 확인 contains() 메소드를 통해 확인 @ParameterizeTest 사용")
     void containsByParameterizeTest(int element) {
         assertThat(numbers.contains(element)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @DisplayName("Set의 원소를 확인 contains() 메소드를 통해 확인 @ParameterizeTest, @CsvSource 사용")
+    //csv 형식으로 값들을 받고 테스트 함수 인수에는 원하는 자료형으로 넣어주면 된다.
+    void contains_ShouldReturnFalseAboutDifferentValue(int input, boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }
