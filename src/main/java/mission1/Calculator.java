@@ -8,6 +8,22 @@ public class Calculator {
         return false;
     }
 
+    public int add(int previousResult, int currentValue) {
+        return previousResult + currentValue;
+    }
+
+    public int subtract(int previousResult, int currentValue) {
+        return previousResult - currentValue;
+    }
+
+    public int multiply(int previousResult, int currentValue) {
+        return previousResult * currentValue;
+    }
+    public int divide(int previousResult, int currentValue) {
+        return previousResult / currentValue;
+    }
+
+
     public int calculate(String input) {
         String[] values = input.split(" ");
         int result = 0;
@@ -16,18 +32,17 @@ public class Calculator {
             if (isOperator(values[i]))
                 operator = values[i];
             else {
-                if (operator.equals("")) {
+                int currentValue = Integer.parseInt(values[i]);
+                if (operator.equals(""))
                     result = Integer.parseInt(values[i]);
-                } else {
-                    if (operator.equals("+"))
-                        result += Integer.parseInt(values[i]);
-                    if (operator.equals("-"))
-                        result -= Integer.parseInt(values[i]);
-                    if (operator.equals("*"))
-                        result *= Integer.parseInt(values[i]);
-                    if (operator.equals("/"))
-                        result /= Integer.parseInt(values[i]);
-                }
+                if (operator.equals("+"))
+                    result = add(result, currentValue);
+                if (operator.equals("-"))
+                    result = subtract(result, currentValue);
+                if (operator.equals("*"))
+                    result = multiply(result, currentValue);
+                if (operator.equals("/"))
+                    result = divide(result, currentValue);
             }
         }
         return result;
