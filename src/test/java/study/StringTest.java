@@ -1,17 +1,21 @@
 package study;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
+    @DisplayName("String class replace() 메서드 테스트")
     void replace() {
         String actual = "abc".replace("b", "d");
         assertThat(actual).isEqualTo("adc");
     }
 
     @Test
+    @DisplayName("String class split() 메서드 테스트")
     void split() {
         String str1 = "1,2";
         //contains()는 예상값이 결과값에 하나라도 존재하면 test 통과
@@ -32,8 +36,22 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("String class substring() 메서드 테스트")
     void substring() {
         String str = "(1,2)";
         assertThat(str.substring(1, str.length() - 1)).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("String class charAt() 메서드 테스트")
+    void charAt() {
+        String str = "abc";
+        assertThat(str.charAt(0)).isEqualTo('a');
+        assertThat(str.charAt(2)).isEqualTo('c');
+
+        int outOfRange = 3;
+        assertThatThrownBy(() -> {
+            assertThat(str.charAt(outOfRange));
+        }).isInstanceOf(StringIndexOutOfBoundsException.class).hasMessage("String index out of range: %d", outOfRange);
     }
 }
