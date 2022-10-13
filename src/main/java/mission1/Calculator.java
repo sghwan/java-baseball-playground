@@ -1,6 +1,9 @@
 package mission1;
 
 public class Calculator {
+    private int result = 0;
+    private String operator = "";
+
     public boolean isOperator(String value) {
         if (value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/"))
             return true;
@@ -37,18 +40,24 @@ public class Calculator {
         return currentValue;
     }
 
+    public void setResult(String value) {
+        if (!isOperator(value)) {
+            int currentValue = Integer.parseInt(value);
+            result = getCurrentResult(result, currentValue, operator);
+        }
+    }
+
+    public void setOperator(String value) {
+        if (isOperator(value))
+            operator = value;
+    }
+
     public int calculate(String input) {
         String[] values = input.split(" ");
-        int result = 0;
-        String operator = "";
 
         for (int i = 0; i < values.length; i++) {
-            if (!isOperator(values[i])) {
-                int currentValue = Integer.parseInt(values[i]);
-                result = getCurrentResult(result, currentValue, operator);
-            }
-
-            operator = values[i];
+            setOperator(values[i]);
+            setResult(values[i]);
         }
 
         return result;
