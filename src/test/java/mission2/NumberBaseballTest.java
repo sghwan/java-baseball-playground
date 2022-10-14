@@ -30,14 +30,6 @@ public class NumberBaseballTest {
         assertThat(gameNumber.length()).isEqualTo(3);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"123,true", "456,true", "121,false", "1234,false"})
-    @DisplayName("사용자가 입력한 값이 3자리이고 중복이 없는 수인지 확인한다.")
-    void validateUserInput(String userInput, boolean expected) {
-        boolean actual = numberBaseball.validateUserInput(userInput);
-        assertThat(actual).isEqualTo(expected);
-    }
-
     @AfterEach
     void tearDown() {
         numberBaseball = null;
