@@ -5,49 +5,46 @@ public class Calculator {
     private String operator = "";
 
     public boolean isOperator(String value) {
-        if (value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/"))
-            return true;
-
-        return false;
+        return value.equals("+") || value.equals("-") || value.equals("*") || value.equals("/");
     }
 
-    public int add(int previousResult, int currentValue) {
-        return previousResult + currentValue;
+    public int add(int currentResult, int currentValue) {
+        return currentResult + currentValue;
     }
 
-    public int subtract(int previousResult, int currentValue) {
-        return previousResult - currentValue;
+    public int subtract(int currentResult, int currentValue) {
+        return currentResult - currentValue;
     }
 
-    public int multiply(int previousResult, int currentValue) {
-        return previousResult * currentValue;
+    public int multiply(int currentResult, int currentValue) {
+        return currentResult * currentValue;
     }
 
-    public int divide(int previousResult, int currentValue) {
-        return previousResult / currentValue;
+    public int divide(int currentResult, int currentValue) {
+        return currentResult / currentValue;
     }
 
-    public int getCurrentResult(int previousResult, int currentValue, String operator) {
+    public int calculateNextResult(int currentResult, int currentValue) {
         if (operator.equals("+"))
-            return add(previousResult, currentValue);
+            return add(currentResult, currentValue);
         if (operator.equals("-"))
-            return subtract(previousResult, currentValue);
+            return subtract(currentResult, currentValue);
         if (operator.equals("*"))
-            return multiply(previousResult, currentValue);
+            return multiply(currentResult, currentValue);
         if (operator.equals("/"))
-            return divide(previousResult, currentValue);
+            return divide(currentResult, currentValue);
 
         return currentValue;
     }
 
-    public void setResult(String value) {
+    public void updateResult(String value) {
         if (!isOperator(value)) {
             int currentValue = Integer.parseInt(value);
-            result = getCurrentResult(result, currentValue, operator);
+            result = calculateNextResult(result, currentValue);
         }
     }
 
-    public void setOperator(String value) {
+    public void updateOperator(String value) {
         if (isOperator(value))
             operator = value;
     }
@@ -55,9 +52,9 @@ public class Calculator {
     public int calculate(String input) {
         String[] values = input.split(" ");
 
-        for (int i = 0; i < values.length; i++) {
-            setOperator(values[i]);
-            setResult(values[i]);
+        for (String value : values) {
+            updateOperator(value);
+            updateResult(value);
         }
 
         return result;
