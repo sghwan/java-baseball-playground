@@ -34,8 +34,8 @@ public class NumberBaseballTest {
     @CsvSource(value = {"231:3볼", "132:1스트라이크 2볼", "123:3스트라이크", "456:낫싱"}, delimiter = ':')
     @DisplayName("스트라이크와 볼 카운트를 한다.")
     void countTotalHitToString(String value, String expected) {
-        String actual = numberBaseball.countTotalHitToString(value);
-        assertThat(actual).isEqualTo(expected);
+        GameCount count = numberBaseball.compare(value);
+        assertThat(count.toString()).isEqualTo(expected);
     }
 
     @AfterEach

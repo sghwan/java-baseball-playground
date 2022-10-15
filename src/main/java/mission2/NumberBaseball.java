@@ -6,11 +6,11 @@ import java.util.List;
 public class NumberBaseball {
     private final String gameNumber;
     private final ArrayList<Integer> numberList = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
-    private final GameCount gameCount;
+    private final CountCalculator calculator;
 
     public NumberBaseball() {
         gameNumber = pickNumbers();
-        gameCount = new GameCount();
+        calculator = new CountCalculator(gameNumber);
     }
 
     /**
@@ -41,37 +41,8 @@ public class NumberBaseball {
         return sb.toString();
     }
 
-    private void countHit(int index, String value) {
-        for (int j = 0; j < value.length(); j++) {
-            boolean isSameIndex = index == j;
-            boolean isSameNumber = gameNumber.charAt(index) == value.charAt(j);
-            //boolean isSameNumber = "123".charAt(index) == value.charAt(j); //테스트용
-            gameCount.count(isSameIndex, isSameNumber);
-        }
-    }
 
-    public GameCount countTotalHit(String value) {
-        for (int i = 0; i < value.length(); i++) {
-            countHit(i, value);
-        }
-        return gameCount;
-    }
-
-    public String countTotalHitToString(String value) {
-        StringBuilder hitCount = new StringBuilder();
-        GameCount gameCount = countTotalHit(value);
-        int strikeCount = gameCount.getStrike().getCount();
-        int ballCount = gameCount.getBall().getCount();
-
-        if (strikeCount == 0 && ballCount == 0)
-            hitCount.append("낫싱");
-        if (strikeCount > 0 && ballCount > 0)
-            hitCount.append(strikeCount).append("스트라이크 ").append(ballCount).append("볼");
-        if (strikeCount > 0 && ballCount == 0)
-            hitCount.append(strikeCount).append("스트라이크");
-        if (strikeCount == 0 && ballCount > 0)
-            hitCount.append(ballCount).append("볼");
-
-        return hitCount.toString();
+    public GameCount compare(String userInput) {
+        return calculator.calculateCount(userInput);
     }
 }

@@ -14,11 +14,21 @@ public class GameCount {
         ball.count(isSameIndex, isSameNumber);
     }
 
-    public Strike getStrike() {
-        return strike;
-    }
+    @Override
+    public String toString() {
+        StringBuilder hitCount = new StringBuilder();
+        int strikeCount = strike.getCount();
+        int ballCount = ball.getCount();
 
-    public Ball getBall() {
-        return ball;
+        if (strikeCount == 0 && ballCount == 0)
+            hitCount.append("낫싱");
+        if (strikeCount > 0 && ballCount > 0)
+            hitCount.append(strikeCount).append("스트라이크 ").append(ballCount).append("볼");
+        if (strikeCount > 0 && ballCount == 0)
+            hitCount.append(strikeCount).append("스트라이크");
+        if (strikeCount == 0 && ballCount > 0)
+            hitCount.append(ballCount).append("볼");
+
+        return hitCount.toString();
     }
 }
