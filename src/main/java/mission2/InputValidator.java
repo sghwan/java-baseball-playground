@@ -8,6 +8,7 @@ public class InputValidator {
         return true;
     }
 
+    //indent 줄이기
     public boolean compareNumber(int start, int length, String value) {
         for (int i = start + 1; i < length; i++) {
             if (value.charAt(start) == value.charAt(i))
@@ -17,6 +18,7 @@ public class InputValidator {
         return false;
     }
 
+    //indent 줄이기
     public boolean checkDuplicateNumber(String value) {
         int length = value.length();
 
