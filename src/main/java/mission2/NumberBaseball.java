@@ -43,6 +43,9 @@ public class NumberBaseball {
 
 
     public GameCount compare(String userInput) {
+        if (userInput == null)
+            return null;
+
         return calculator.calculateCount(userInput);
     }
 }

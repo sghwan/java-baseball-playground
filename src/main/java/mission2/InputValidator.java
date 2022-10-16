@@ -2,7 +2,7 @@ package mission2;
 
 public class InputValidator {
     public boolean checkStringLength(String value) {
-        if (value.length() > 3)
+        if (value.length() != 3)
             return false;
 
         return true;
