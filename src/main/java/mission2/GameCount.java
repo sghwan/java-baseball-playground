@@ -14,6 +14,10 @@ public class GameCount {
         ball.count(isSameIndex, isSameNumber);
     }
 
+    public Strike getStrike() {
+        return strike;
+    }
+
     @Override
     public String toString() {
         StringBuilder hitCount = new StringBuilder();
